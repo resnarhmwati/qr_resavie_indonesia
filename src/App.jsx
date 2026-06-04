@@ -550,7 +550,7 @@ const StatsSection = () => (
           { value: "50+", label: "Cafe & UMKM Aktif", icon: Store },
           { value: "5000+", label: "Transaksi Berhasil", icon: ShoppingCart },
           { value: "99%", label: "Uptime Layanan", icon: Shield },
-          { value: "< 3 dtk", label: "Waktu Load Menu", icon: Zap },
+          { value: "< 1 Menit", label: "Waktu Load Menu", icon: Zap },
         ].map((stat, i) => (
           <div key={i} className="flex flex-col items-center text-center gap-1">
             <stat.icon size={20} className="text-amber-300 mb-1" />
@@ -970,7 +970,7 @@ const TestimonialsSection = () => (
         />
         <TestimonialCard
           name="Siti Nurhaliza"
-          role="Manager, Kopi Kenangan Cianjur"
+          role="Manager, Kopi Teguk"
           avatar="SN"
           quote="Pesanan via WhatsApp terformat sangat rapi. Staff kami gak bingung lagi baca pesanan, dan salah tulis sudah tidak pernah terjadi sejak pakai ini. Worth it banget!"
           rating={5}
