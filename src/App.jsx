@@ -24,6 +24,15 @@ import {
   Utensils,
   Store,
   Settings,
+  BookOpen,
+  Smartphone,
+  BarChart3,
+  Crown,
+  Eye,
+  AlertTriangle,
+  Printer,
+  FileX,
+  Sparkles,
 } from "lucide-react";
 
 /* ============================================================
@@ -127,156 +136,183 @@ const TestimonialCard = ({ name, role, avatar, quote, rating = 5 }) => (
 );
 
 // ── Pricing Card ──────────────────────────────────────────────
-const PricingCard = ({ emoji, plan, price, tagline, description, features, cta, highlight = false }) => (
-  <div
-    className="relative flex flex-col rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2"
-    style={highlight ? {
-      /* Pro — Dark Elite */
-      background: "linear-gradient(145deg, #1c0f05 0%, #3d1a06 45%, #1c0f05 100%)",
-      boxShadow: "0 32px 80px rgba(120,53,15,0.5), 0 8px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.07)",
-      border: "1px solid rgba(217,119,6,0.35)",
-    } : {
-      /* Basic — Light Luxury */
-      background: "linear-gradient(145deg, #fffdf7 0%, #fef9ed 50%, #fdf4e3 100%)",
-      boxShadow: "0 20px 60px rgba(120,53,15,0.12), 0 4px 16px rgba(120,53,15,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
-      border: "1px solid rgba(217,119,6,0.2)",
-    }}
-  >
-    {/* Decorative orbs */}
-    {highlight ? (
-      /* Pro orbs — bright gold on dark */
-      <>
-        <div className="absolute -top-14 -right-14 w-48 h-48 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.3) 0%, transparent 65%)" }} />
-        <div className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(251,191,36,0.2) 0%, transparent 65%)" }} />
-        <div className="absolute top-1/2 -right-8 w-24 h-24 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(217,119,6,0.15) 0%, transparent 70%)" }} />
-      </>
-    ) : (
-      /* Basic orbs — soft amber on cream */
-      <>
-        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(251,191,36,0.18) 0%, transparent 65%)" }} />
-        <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 65%)" }} />
-      </>
-    )}
+const PricingCard = ({ emoji, plan, price, tagline, description, features, cta, badge, tier = "basic" }) => {
+  const isPremium = tier === "premium";
+  const isPro = tier === "pro";
+  const isBasic = tier === "basic";
 
-    {/* Top accent bar */}
-    <div className="h-1 w-full shrink-0"
-      style={highlight
-        ? { background: "linear-gradient(90deg, #92400e, #f59e0b, #fbbf24, #f59e0b, #92400e)" }
-        : { background: "linear-gradient(90deg, #fde68a, #f59e0b, #fbbf24, #f59e0b, #fde68a)" }
-      }
-    />
+  const cardStyle = isPremium ? {
+    background: "linear-gradient(145deg, #1c0f05 0%, #3d1a06 45%, #1c0f05 100%)",
+    boxShadow: "0 32px 80px rgba(120,53,15,0.5), 0 8px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.07)",
+    border: "1px solid rgba(217,119,6,0.35)",
+  } : isPro ? {
+    background: "linear-gradient(145deg, #2a1810 0%, #3a2015 50%, #2a1810 100%)",
+    boxShadow: "0 24px 60px rgba(120,53,15,0.35), 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05)",
+    border: "1px solid rgba(217,119,6,0.25)",
+  } : {
+    background: "linear-gradient(145deg, #fffdf7 0%, #fef9ed 50%, #fdf4e3 100%)",
+    boxShadow: "0 20px 60px rgba(120,53,15,0.12), 0 4px 16px rgba(120,53,15,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
+    border: "1px solid rgba(217,119,6,0.2)",
+  };
 
-    <div className="relative z-10 p-8 flex flex-col gap-6">
+  const isDark = isPremium || isPro;
 
-      {/* Badge */}
-      {highlight ? (
-        <div className="self-start">
-          <span className="inline-flex items-center gap-1.5 text-xs font-black px-4 py-1.5 rounded-full tracking-wide"
-            style={{ background: "linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)", color: "#1c0f05", boxShadow: "0 4px 20px rgba(245,158,11,0.5)" }}>
-            🚀 PALING POPULER
-          </span>
-        </div>
+  return (
+    <div
+      className={`relative flex flex-col rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-3 ${isPremium ? "md:scale-105 z-10" : ""}`}
+      style={cardStyle}
+    >
+      {/* Decorative orbs */}
+      {isPremium ? (
+        <>
+          <div className="absolute -top-14 -right-14 w-48 h-48 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(245,158,11,0.35) 0%, transparent 65%)" }} />
+          <div className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.25) 0%, transparent 65%)" }} />
+          <div className="absolute top-1/2 -right-8 w-24 h-24 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(217,119,6,0.2) 0%, transparent 70%)" }} />
+          {/* Premium glow effect */}
+          <div className="absolute inset-0 pointer-events-none opacity-20"
+            style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.4) 0%, transparent 60%)" }} />
+        </>
+      ) : isDark ? (
+        <>
+          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 65%)" }} />
+          <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 65%)" }} />
+        </>
       ) : (
-        <div className="self-start">
-          <span className="inline-flex items-center gap-1.5 text-xs font-black px-4 py-1.5 rounded-full tracking-wide"
-            style={{ background: "linear-gradient(90deg, #fef3c7, #fde68a)", color: "#78350f", border: "1px solid rgba(217,119,6,0.3)", boxShadow: "0 2px 12px rgba(245,158,11,0.2)" }}>
-            📱 MULAI DARI SINI
-          </span>
-        </div>
+        <>
+          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.18) 0%, transparent 65%)" }} />
+          <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 65%)" }} />
+        </>
       )}
 
-      {/* Plan header */}
-      <div>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0"
-            style={highlight
-              ? { background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.35)", boxShadow: "0 4px 16px rgba(245,158,11,0.2)" }
-              : { background: "linear-gradient(135deg, #fef3c7, #fde68a)", border: "1px solid rgba(217,119,6,0.3)", boxShadow: "0 4px 12px rgba(217,119,6,0.15)" }
-            }>
-            {emoji}
-          </span>
-          <div>
-            <p className={`text-[10px] font-black uppercase tracking-[0.18em] mb-1 ${highlight ? "text-amber-500" : "text-amber-600"}`}>
-              Paket
-            </p>
-            <h3 className={`text-3xl font-black leading-none ${highlight ? "text-white" : "text-stone-800"}`}>
-              {plan}
-            </h3>
-          </div>
-        </div>
-
-        <div className="mb-2">
-          <span className={`text-[2.8rem] font-black leading-none tracking-tight ${highlight ? "text-white" : "text-amber-900"}`}>
-            {price}
-          </span>
-        </div>
-        <p className={`text-sm font-semibold leading-relaxed ${highlight ? "text-amber-300" : "text-amber-700"}`}>
-          {tagline}
-        </p>
-      </div>
-
-      {/* Divider */}
-      <div className="h-px"
-        style={highlight
-          ? { background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent)" }
-          : { background: "linear-gradient(90deg, transparent, rgba(217,119,6,0.25), transparent)" }
+      {/* Top accent bar */}
+      <div className="h-1 w-full shrink-0"
+        style={isPremium
+          ? { background: "linear-gradient(90deg, #92400e, #f59e0b, #fbbf24, #f59e0b, #92400e)" }
+          : isDark
+          ? { background: "linear-gradient(90deg, #78350f, #b45309, #d97706, #b45309, #78350f)" }
+          : { background: "linear-gradient(90deg, #fde68a, #f59e0b, #fbbf24, #f59e0b, #fde68a)" }
         }
       />
 
-      {/* Description */}
-      <p className={`text-sm leading-relaxed ${highlight ? "text-amber-100/80" : "text-stone-600"}`}>
-        {description}
-      </p>
+      <div className="relative z-10 p-8 flex flex-col gap-6 flex-1">
 
-      {/* Features */}
-      <div>
-        <p className={`text-[10px] font-black uppercase tracking-[0.18em] mb-4 ${highlight ? "text-amber-400" : "text-amber-700"}`}>
-          Yang didapat:
+        {/* Badge */}
+        <div className="self-start">
+          <span className={`inline-flex items-center gap-1.5 text-xs font-black px-4 py-1.5 rounded-full tracking-wide`}
+            style={isPremium
+              ? { background: "linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)", color: "#1c0f05", boxShadow: "0 4px 20px rgba(245,158,11,0.5)" }
+              : isDark
+              ? { background: "linear-gradient(90deg, rgba(245,158,11,0.2), rgba(251,191,36,0.3))", color: "#fbbf24", border: "1px solid rgba(245,158,11,0.35)" }
+              : { background: "linear-gradient(90deg, #fef3c7, #fde68a)", color: "#78350f", border: "1px solid rgba(217,119,6,0.3)", boxShadow: "0 2px 12px rgba(245,158,11,0.2)" }
+            }>
+            {badge}
+          </span>
+        </div>
+
+        {/* Plan header */}
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0"
+              style={isPremium
+                ? { background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.35)", boxShadow: "0 4px 16px rgba(245,158,11,0.2)" }
+                : isDark
+                ? { background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.25)" }
+                : { background: "linear-gradient(135deg, #fef3c7, #fde68a)", border: "1px solid rgba(217,119,6,0.3)", boxShadow: "0 4px 12px rgba(217,119,6,0.15)" }
+              }>
+              {emoji}
+            </span>
+            <div>
+              <p className={`text-[10px] font-black uppercase tracking-[0.18em] mb-1 ${isDark ? "text-amber-500" : "text-amber-600"}`}>
+                Paket
+              </p>
+              <h3 className={`text-3xl font-black leading-none ${isDark ? "text-white" : "text-stone-800"}`}>
+                {plan}
+              </h3>
+            </div>
+          </div>
+
+          <div className="mb-2">
+            <span className={`text-[2.8rem] font-black leading-none tracking-tight ${isDark ? "text-white" : "text-amber-900"}`}>
+              {price}
+            </span>
+            <span className={`text-sm sm:text-base ml-2 font-bold ${isPremium ? "text-amber-300" : isDark ? "text-amber-400" : "text-amber-700"}`}>
+              / Selamanya
+            </span>
+          </div>
+          <p className={`text-sm font-semibold leading-relaxed ${isPremium ? "text-amber-300" : isDark ? "text-amber-400" : "text-amber-700"}`}>
+            {tagline}
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px"
+          style={isDark
+            ? { background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent)" }
+            : { background: "linear-gradient(90deg, transparent, rgba(217,119,6,0.25), transparent)" }
+          }
+        />
+
+        {/* Description */}
+        <p className={`text-sm leading-relaxed ${isDark ? "text-amber-100/80" : "text-stone-600"}`}>
+          {description}
         </p>
-        <ul className="flex flex-col gap-3">
-          {features.map((f, i) => (
-            <li key={i} className="flex items-start gap-3">
-              <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                style={highlight
-                  ? { background: "rgba(245,158,11,0.2)", border: "1px solid rgba(245,158,11,0.4)" }
-                  : { background: "linear-gradient(135deg, #fef3c7, #fde68a)", border: "1px solid rgba(217,119,6,0.35)", boxShadow: "0 2px 6px rgba(217,119,6,0.15)" }
-                }>
-                <CheckCircle2 size={11} className={highlight ? "text-amber-400" : "text-amber-700"} />
-              </span>
-              <span className={`text-sm leading-snug ${highlight ? "text-amber-100" : "text-stone-700"}`}>{f}</span>
-            </li>
-          ))}
-        </ul>
+
+        {/* Features */}
+        <div className="flex-1">
+          <p className={`text-[10px] font-black uppercase tracking-[0.18em] mb-4 ${isPremium ? "text-amber-400" : isDark ? "text-amber-500" : "text-amber-700"}`}>
+            Yang didapat:
+          </p>
+          <ul className="flex flex-col gap-3">
+            {features.map((f, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                  style={isDark
+                    ? { background: "rgba(245,158,11,0.2)", border: "1px solid rgba(245,158,11,0.4)" }
+                    : { background: "linear-gradient(135deg, #fef3c7, #fde68a)", border: "1px solid rgba(217,119,6,0.35)", boxShadow: "0 2px 6px rgba(217,119,6,0.15)" }
+                  }>
+                  <CheckCircle2 size={11} className={isDark ? "text-amber-400" : "text-amber-700"} />
+                </span>
+                <span className={`text-sm leading-snug ${isDark ? "text-amber-100" : "text-stone-700"}`}>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* CTA */}
+        <a
+          href={`https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20paket%20${encodeURIComponent(plan)}%20untuk%20cafe/restoran%20saya.%20Boleh%20konsultasi%3F`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-2 w-full py-4 rounded-2xl font-black text-sm transition-all duration-300 flex items-center justify-center gap-2 hover:opacity-90"
+          style={isPremium ? {
+            background: "linear-gradient(135deg, #d97706, #f59e0b, #fbbf24)",
+            color: "#1c0f05",
+            boxShadow: "0 10px 36px rgba(245,158,11,0.5), 0 2px 8px rgba(0,0,0,0.2)",
+          } : isDark ? {
+            background: "linear-gradient(135deg, #92400e, #b45309, #d97706)",
+            color: "#fef3c7",
+            boxShadow: "0 10px 32px rgba(120,53,15,0.4), 0 2px 8px rgba(0,0,0,0.15)",
+          } : {
+            background: "linear-gradient(135deg, #92400e, #b45309, #78350f)",
+            color: "#fef3c7",
+            boxShadow: "0 10px 32px rgba(120,53,15,0.35), 0 2px 8px rgba(0,0,0,0.1)",
+          }}
+        >
+          {cta}
+          <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
+        </a>
+
       </div>
-
-      {/* CTA */}
-      <a
-        href={`https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20paket%20${encodeURIComponent(plan)}%20untuk%20cafe%20saya.%20Boleh%20konsultasi%3F`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group mt-2 w-full py-4 rounded-2xl font-black text-sm transition-all duration-300 flex items-center justify-center gap-2 hover:opacity-90"
-        style={highlight ? {
-          background: "linear-gradient(135deg, #d97706, #f59e0b, #fbbf24)",
-          color: "#1c0f05",
-          boxShadow: "0 10px 36px rgba(245,158,11,0.5), 0 2px 8px rgba(0,0,0,0.2)",
-        } : {
-          background: "linear-gradient(135deg, #92400e, #b45309, #78350f)",
-          color: "#fef3c7",
-          boxShadow: "0 10px 32px rgba(120,53,15,0.35), 0 2px 8px rgba(0,0,0,0.1)",
-        }}
-      >
-        {cta}
-        <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
-      </a>
-
     </div>
-  </div>
-);
+  );
+};
 
 /* ============================================================
    SECTION COMPONENTS
@@ -295,7 +331,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "#features", label: "Fitur" },
-    { href: "#how-it-works", label: "Cara Kerja" },
+    { href: "#demo", label: "Demo" },
     { href: "#pricing", label: "Harga" },
     { href: "#testimonials", label: "Testimoni" },
     { href: "#contact", label: "Kontak" },
@@ -421,7 +457,7 @@ const HeroSection = () => (
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-stone-800 leading-tight mb-5">
           Revolusi{" "}
           <span className="relative">
-            <span className="text-amber-700">Layanan Cafe</span>
+            <span className="text-amber-700">Layanan Cafe/Restoran</span>
             <svg
               className="absolute -bottom-2 left-0 w-full"
               viewBox="0 0 300 12"
@@ -459,17 +495,18 @@ const HeroSection = () => (
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
           <a
-            href="#contact"
+            href="#demo"
             className="inline-flex items-center justify-center gap-2.5 bg-amber-900 text-white font-bold px-7 py-4 rounded-2xl hover:bg-amber-800 transition-all duration-200 shadow-xl hover:shadow-amber-900/30 text-base group"
           >
-            Coba Gratis Sekarang
+            <Eye size={18} />
+            Lihat Demo
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="#how-it-works"
+            href="#pricing"
             className="inline-flex items-center justify-center gap-2 border-2 border-amber-200 text-amber-900 font-semibold px-7 py-4 rounded-2xl hover:bg-amber-50 hover:border-amber-300 transition-all duration-200 text-base"
           >
-            Lihat Demo
+            Lihat Paket
             <ChevronDown size={16} />
           </a>
         </div>
@@ -487,7 +524,7 @@ const HeroSection = () => (
             ))}
           </div>
           <p className="text-sm text-stone-500">
-            Dipercaya <strong className="text-stone-700">50+ Cafe & UMKM</strong> di Indonesia
+            Dipercaya <strong className="text-stone-700">50+ Cafe/Restoran & UMKM</strong> di Indonesia
           </p>
         </div>
       </div>
@@ -547,7 +584,7 @@ const StatsSection = () => (
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
         {[
-          { value: "50+", label: "Cafe & UMKM Aktif", icon: Store },
+          { value: "50+", label: "Cafe/Restoran & UMKM Aktif", icon: Store },
           { value: "5000+", label: "Transaksi Berhasil", icon: ShoppingCart },
           { value: "99%", label: "Uptime Layanan", icon: Shield },
           { value: "< 1 Menit", label: "Waktu Load Menu", icon: Zap },
@@ -565,96 +602,114 @@ const StatsSection = () => (
   </section>
 );
 
-// ── How It Works / Customer Flow Section ──────────────────────
-const HowItWorksSection = () => {
-  const customerScreens = [
-    { img: "/qr.png",           label: "Scan QR Code",      desc: "Arahkan kamera ke QR di meja — no install app" },
-    { img: "/cust-dashboard.png", label: "Browse E-Menu",    desc: "Semua menu tampil cantik dengan foto & harga" },
-    { img: "/checkout.png",     label: "Pilih & Checkout",  desc: "Keranjang pintar, isi nama/nomor meja" },
-    { img: "/form-whatsapp.png",label: "Pesan via WhatsApp",desc: "Pesanan terkirim otomatis ke kasir" },
-  ];
+// ── Mini Phone Mockup helper (used inside DemoSection tabs) ───
+// width is controlled by parent — pass className for sizing
+const MiniPhone = ({ src, alt, className = "" }) => (
+  <div
+    className={`relative overflow-hidden flex flex-col shrink-0 ${className}`}
+    style={{
+      aspectRatio: "9/19",
+      background: "#1a1a1a",
+      border: "5px solid #1a1a1a",
+      borderRadius: "1.25rem",
+      boxShadow: "0 24px 64px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3)",
+    }}
+  >
+    <div className="bg-[#1a1a1a] flex items-center justify-center px-2 pt-1 pb-0 z-10 shrink-0">
+      <div className="w-2.5 h-2.5 bg-[#0d0d0d] rounded-full border border-[#444]" />
+    </div>
+    <div className="flex-1 overflow-hidden">
+      <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
+    </div>
+    <div className="bg-[#1a1a1a] flex items-center justify-center py-1.5 shrink-0">
+      <div className="w-10 h-[3px] bg-white/25 rounded-full" />
+    </div>
+  </div>
+);
 
+
+// ── Problem & Solution Section ────────────────────────────────
+const ProblemSolutionSection = () => {
   return (
-    <section id="how-it-works" className="bg-white py-20 md:py-28">
+    <section id="problem-solution" className="py-20 md:py-28 bg-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
-        <div className="text-center mb-14">
-          <SectionBadge icon={Users} text="Alur Pelanggan" />
-          <h2 className="text-3xl sm:text-4xl font-black text-stone-800 mb-4">
-            Pengalaman Memesan yang{" "}
-            <span className="text-amber-700">Benar-Benar Mulus</span>
+        <div className="text-center mb-16">
+          <SectionBadge icon={AlertTriangle} text="Tantangan Bisnis Kuliner" />
+          <h2 className="text-3xl sm:text-4xl font-black text-stone-800 mb-6">
+            Masih Pakai Menu <span className="text-amber-700">Fisik & Kertas?</span>
           </h2>
-          <p className="text-stone-600 max-w-xl mx-auto leading-relaxed">
-            Dari pelanggan datang hingga pesanan masuk ke kasir — semua terjadi dalam hitungan menit, tanpa hambatan, tanpa kebingungan.
-          </p>
         </div>
 
-        {/* 4-Step Customer Flow — 2-col grid on mobile, horizontal row on md+ */}
-        <div className="grid grid-cols-2 md:flex md:flex-row md:items-start md:justify-center gap-6 md:gap-10 mb-14">
-          {customerScreens.map((screen, i) => (
-            <div key={i} className="flex md:items-start">
-              <div className="flex flex-col items-center gap-3 w-full">
-                {/* Step number */}
-                <div className="w-8 h-8 bg-amber-900 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-white text-sm font-black">{i + 1}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left: Problems */}
+          <div className="space-y-6">
+            {[
+              {
+                icon: FileX,
+                title: "Menu Cepat Rusak & Kotor",
+                desc: "Menu kertas mudah lecek, ketumpahan air, dan terlihat tidak profesional di mata pelanggan.",
+              },
+              {
+                icon: Printer,
+                title: "Repot & Mahal Cetak Ulang",
+                desc: "Setiap ada perubahan harga atau menu baru, Anda harus membuang menu lama dan mencetak yang baru.",
+              },
+              {
+                icon: Clock,
+                title: "Pelanggan Menunggu Lama",
+                desc: "Pelanggan harus menunggu waiter datang membawa menu, membuat proses pemesanan jadi lambat.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4 p-5 bg-red-50/50 rounded-2xl border border-red-100">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center shrink-0">
+                  <item.icon size={24} className="text-red-600" />
                 </div>
-                {/* Android Mini Phone Mockup */}
-                <div
-                  className="relative overflow-hidden flex flex-col"
-                  style={{
-                    width: "110px",
-                    aspectRatio: "9/19",
-                    background: "#1a1a1a",
-                    border: "5px solid #1a1a1a",
-                    borderRadius: "1.1rem",
-                    boxShadow: "0 20px 60px rgba(0,0,0,0.45), 0 6px 20px rgba(0,0,0,0.25)",
-                  }}
-                >
-                  {/* Status bar */}
-                  <div className="bg-[#1a1a1a] flex items-center justify-center px-2 pt-0.5 pb-0 z-10 shrink-0">
-                    <div className="w-2 h-2 bg-[#0d0d0d] rounded-full border border-[#444]" />
-                  </div>
-                  {/* Screen */}
-                  <div className="flex-1 overflow-hidden">
-                    <img
-                      src={screen.img}
-                      alt={screen.label}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                  {/* Gesture bar */}
-                  <div className="bg-[#1a1a1a] flex items-center justify-center py-1 shrink-0">
-                    <div className="w-10 h-[2px] bg-white/25 rounded-full" />
-                  </div>
-                </div>
-                {/* Label */}
-                <div className="text-center" style={{ maxWidth: "130px" }}>
-                  <p className="text-sm font-bold text-stone-800 leading-tight">{screen.label}</p>
-                  <p className="text-xs text-stone-500 leading-tight mt-0.5">{screen.desc}</p>
+                <div>
+                  <h3 className="text-lg font-bold text-stone-800 mb-1">{item.title}</h3>
+                  <p className="text-stone-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
-              {/* Arrow only visible on md+ */}
-              {i < customerScreens.length - 1 && (
-                <ArrowRight size={22} className="text-amber-400 shrink-0 mt-14 hidden md:block" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Highlights */}
-        <div className="bg-amber-50 border border-amber-100 rounded-3xl p-8">
-          <h3 className="text-lg font-black text-amber-900 mb-5 text-center">Kenapa Pelanggan Suka?</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              "Tidak perlu install aplikasi — langsung buka di browser",
-              "Menu tampil cepat (\u003c 3 detik) dengan foto produk yang menggoda",
-              "Desain menu bisa disesuaikan warna & logo brand Anda",
-              "Pelanggan bisa filter menu per kategori (Kopi, Makanan, dll)",
-              "Pesanan terkirim otomatis ke WhatsApp kasir dalam format rapi",
-              "Zero error — tidak ada salah input atau pesanan hilang",
-            ].map((h, i) => (
-              <CheckItem key={i} text={h} />
             ))}
+          </div>
+
+          {/* Right: Solution */}
+          <div className="bg-gradient-to-br from-amber-900 to-stone-900 rounded-3xl p-8 sm:p-10 text-white relative shadow-2xl overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10">
+              <Sparkles size={120} />
+            </div>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6">
+                <CheckCircle2 size={16} className="text-amber-400" />
+                <span className="text-sm font-semibold tracking-wide text-amber-50">SOLUSI RESAVIE LABS</span>
+              </div>
+              <h3 className="text-3xl font-black mb-6 leading-tight">
+                Beralih ke <span className="text-amber-400">Menu Digital</span> yang Pintar
+              </h3>
+              <p className="text-stone-300 mb-8 leading-relaxed text-lg">
+                Tinggalkan cara lama. Dengan QR Menu Digital, Anda menghemat biaya operasional, memudahkan pelanggan, dan meningkatkan citra bisnis seketika.
+              </p>
+              
+              <ul className="space-y-4 mb-10">
+                {[
+                  "Scan QR langsung dari meja, no-install",
+                  "Update harga & ketersediaan secara realtime",
+                  "Tampilan selalu modern, rapi & higienis",
+                  "Pesanan terintegrasi langsung ke WhatsApp/Dashboard Admin"
+                ].map((text, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-amber-400/20 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={14} className="text-amber-400" />
+                    </div>
+                    <span className="text-stone-200">{text}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a href="#demo" className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-stone-900 font-black px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-amber-500/30">
+                Lihat Demo Sekarang
+                <ArrowRight size={20} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -672,13 +727,12 @@ const AdminFeaturesSection = () => {
       title: "Login Admin yang Aman & Eksklusif",
       subtitle: "Hanya Anda yang bisa masuk — tidak ada celah untuk pihak lain",
       description:
-        "Setiap dashboard admin dilindungi dengan sistem autentikasi yang kuat. Hanya akun yang terdaftar yang dapat mengakses panel manajemen cafe Anda — sehingga data menu, pengaturan, dan informasi bisnis Anda terlindungi sepenuhnya dari akses tidak sah.",
+        "Setiap dashboard admin dilindungi dengan sistem autentikasi yang kuat. Hanya akun yang terdaftar yang dapat mengakses panel manajemen cafe/restoran Anda — sehingga data menu, pengaturan, dan informasi bisnis Anda terlindungi sepenuhnya dari akses tidak sah.",
       highlights: [
         "Halaman login khusus dengan autentikasi aman",
         "Sesi admin terenkripsi — tidak bisa diakses sembarangan",
-        "Logout otomatis untuk mencegah akses tidak sah",
-        "Credential unik per cafe — tidak ada akun yang dibagikan",
-        "Tampilan login branded sesuai identitas Resavie Labs",
+        "Credential unik per cafe/restoran — tidak ada akun yang dibagikan ke orang lain",
+        "Tampilan login branded sesuai identitas Cafe/Restoran Anda",
       ],
       mockupContent: (
         <img src="/loading-admin.jpeg" alt="Login Admin" className="w-full h-full object-cover object-top" />
@@ -698,7 +752,7 @@ const AdminFeaturesSection = () => {
         "CRUD Menu lengkap: Tambah, Edit, Hapus item dengan mudah",
         "Toggle ketersediaan item — tandai 'Habis' tanpa hapus menu",
         "Upload foto menu langsung dari HP atau komputer",
-        "Kelola info cafe: Nama, Alamat, dan Nomor WA Kasir",
+        "Kelola info cafe/restoran: Nama, Alamat, dan Nomor WA Kasir",
         "Atur kategori menu sesuai kebutuhan bisnis Anda",
       ],
       mockupContent: (
@@ -713,13 +767,13 @@ const AdminFeaturesSection = () => {
       title: "Info Wi-Fi Cerdas untuk Pelanggan",
       subtitle: "Tingkatkan kenyamanan pelanggan, tingkatkan lama kunjungan",
       description:
-        "Tahukah Anda? Pelanggan yang tahu password Wi-Fi cenderung 40% lebih lama berada di cafe Anda — dan peluang memesan ulang pun meningkat. Fitur ini menampilkan nama dan password Wi-Fi secara otomatis di tampilan menu pelanggan, langsung dan tanpa kerumitan.",
+        "Tahukah Anda? Pelanggan yang tahu password Wi-Fi cenderung 40% lebih lama berada di cafe/restoran Anda — dan peluang memesan ulang pun meningkat. Fitur ini menampilkan nama dan password Wi-Fi secara otomatis di tampilan menu pelanggan, langsung dan tanpa kerumitan.",
       highlights: [
         "Popup Info Wi-Fi muncul otomatis saat pelanggan buka menu",
         "Nama & Password Wi-Fi bisa diubah kapan saja dari panel admin",
         "Tombol 'Salin Password' satu ketuk — langsung tersalin di clipboard",
         "Desain popup yang elegant, tidak mengganggu pengalaman browsing menu",
-        "Bisa dinonaktifkan jika cafe tidak menyediakan Wi-Fi gratis",
+        "Bisa dinonaktifkan jika cafe/restoran tidak menyediakan Wi-Fi gratis",
       ],
       mockupContent: (
         <img src="/info-wifi.png" alt="Info WiFi Pelanggan" className="w-full h-full object-cover object-top" />
@@ -728,12 +782,12 @@ const AdminFeaturesSection = () => {
     },
     {
       id: 5,
-      badge: "Pengaturan Cafe",
+      badge: "Pengaturan Cafe/Restoran",
       badgeIcon: Settings,
-      title: "Pengaturan Cafe yang Fleksibel",
-      subtitle: "Ubah info cafe, Wi-Fi, dan konten kapan saja tanpa bantuan teknisi",
+      title: "Pengaturan Cafe/Restoran yang Fleksibel",
+      subtitle: "Ubah info cafe/restoran, Wi-Fi, dan konten kapan saja tanpa bantuan teknisi",
       description:
-        "Semua informasi penting cafe Anda — nama, alamat, nomor WhatsApp kasir, tagline, hingga password Wi-Fi — bisa diperbarui langsung dari panel pengaturan yang sederhana. Tidak perlu repot menghubungi developer setiap kali ada perubahan.",
+        "Semua informasi penting cafe/restoran Anda — nama, alamat, nomor WhatsApp kasir, tagline, hingga password Wi-Fi — bisa diperbarui langsung dari panel pengaturan yang sederhana. Tidak perlu repot menghubungi developer setiap kali ada perubahan.",
       highlights: [
         "Ubah nama, alamat, dan nomor WhatsApp kasir kapan saja",
         "Kelola info Wi-Fi: Nama & Password bisa diperbarui real-time",
@@ -742,7 +796,7 @@ const AdminFeaturesSection = () => {
         "Perubahan langsung berlaku — tanpa reload atau deploy ulang",
       ],
       mockupContent: (
-        <img src="/pengaturan.png" alt="Pengaturan Cafe" className="w-full h-full object-cover object-top" />
+        <img src="/pengaturan.png" alt="Pengaturan Cafe/Restoran" className="w-full h-full object-cover object-top" />
       ),
       imageOnLeft: true,
     },
@@ -759,7 +813,7 @@ const AdminFeaturesSection = () => {
             <span className="text-amber-700">Tangan Anda</span>
           </h2>
           <p className="text-stone-600 max-w-xl mx-auto leading-relaxed">
-            Panel admin yang intuitif dirancang agar siapa pun di tim Anda bisa mengelola menu dan pengaturan cafe — tanpa perlu jago teknologi.
+            Panel admin yang intuitif dirancang agar siapa pun di tim Anda bisa mengelola menu dan pengaturan cafe/restoran — tanpa perlu jago teknologi.
           </p>
         </div>
 
@@ -814,12 +868,12 @@ const FeatureGridSection = () => {
     {
       icon: Palette,
       title: "Fully Customizable Brand",
-      desc: "Logo, warna tema, nama cafe — semua bisa disesuaikan 100% sesuai identitas brand Anda.",
+      desc: "Logo, warna tema, nama cafe/restoran — semua bisa disesuaikan 100% sesuai identitas brand Anda.",
     },
     {
       icon: QrCode,
-      title: "QR Code Unik per Meja",
-      desc: "Setiap meja mendapatkan QR Code unik. Mudah dicetak, mudah dipasang, mudah di-scan.",
+      title: "Satu QR Code Praktis",
+      desc: "Hanya butuh satu QR Code untuk semua meja. Pelanggan cukup scan dan isi nomor mejanya sendiri saat pesan.",
     },
     {
       icon: MessageCircle,
@@ -834,12 +888,12 @@ const FeatureGridSection = () => {
     {
       icon: Shield,
       title: "Aman & Terpercaya",
-      desc: "Sistem login admin yang aman. Data menu dan informasi cafe Anda terlindungi sepenuhnya.",
+      desc: "Sistem login admin yang aman. Data menu dan informasi cafe/restoran Anda terlindungi sepenuhnya.",
     },
     {
-      icon: Zap,
-      title: "Performa Super Cepat",
-      desc: "Menu terbuka dalam < 3 detik bahkan di jaringan lemah sekalipun. Pelanggan tidak perlu menunggu.",
+      icon: TrendingUp,
+      title: "Laporan & Statistik",
+      desc: "Pantau omzet harian dan menu terlaris langsung dari dashboard. Fitur unggulan khusus Paket Premium.",
     },
     {
       icon: Clock,
@@ -886,55 +940,311 @@ const FeatureGridSection = () => {
   );
 };
 
+// ── Demo Section ──────────────────────────────────────────────
+const DemoSection = () => {
+  const [activeTab, setActiveTab] = useState("basic");
+
+  const basicScreens = [
+    { img: "/qr.png",             label: "Scan QR di Kasir/Meja",             desc: "Arahkan kamera ke QR — langsung buka di browser, no install app" },
+    { img: "/cust_dashboard.png", label: "Mengarah ke URL Menu Digital", desc: "Browser otomatis menampilkan halaman menu digital cafe/restoran" },
+    { img: "/deskripsi.png", label: "Melihat Katalog Menu",         desc: "Customer menjelajahi menu lengkap: foto, harga & deskripsi" },
+  ];
+
+  const proScreens = [
+    { img: "/qr.png",             label: "Scan QR Code",       desc: "Arahkan kamera ke QR di meja — no install app" },
+    { img: "/cust-dashboard.png", label: "Browse E-Menu",      desc: "Browser otomatis menampilkan halaman menu digital cafe/restoran" },
+    { img: "/checkout.png",       label: "Pilih & Checkout",   desc: "Keranjang pintar, isi nama/nomor meja" },
+    { img: "/form-whatsapp.png",  label: "Pesan via WhatsApp", desc: "Pesanan terkirim otomatis ke kasir" },
+  ];
+
+  const proHighlights = [
+    "Tidak perlu install aplikasi — langsung buka di browser",
+    "Menu tampil cepat (< 3 detik) dengan foto produk yang menggoda",
+    "Desain menu bisa disesuaikan warna & logo brand Anda",
+    "Pelanggan bisa filter menu per kategori (Kopi, Makanan, dll)",
+    "Pesanan terkirim otomatis ke WhatsApp kasir dalam format rapi",
+    "Zero error — tidak ada salah input atau pesanan hilang",
+  ];
+
+  const FlowSteps = ({ screens, accentColor }) => (
+    <>
+      {/* Mobile: horizontal scroll row */}
+      <div className="flex md:hidden overflow-x-auto gap-4 pb-4 -mx-4 px-4 mb-8 snap-x snap-mandatory">
+        {screens.map((screen, i) => (
+          <div key={i} className="flex flex-col items-center gap-3 shrink-0 snap-center" style={{ width: "160px" }}>
+            <MiniPhone src={screen.img} alt={screen.label} className="w-full" />
+            <div className="text-center w-full">
+              <p className="text-sm font-bold text-stone-800 leading-tight">{screen.label}</p>
+              <p className="text-xs text-stone-500 leading-tight mt-1">{screen.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: flex row with arrows */}
+      <div className="hidden md:flex md:flex-row md:items-start md:justify-center gap-6 mb-10">
+        {screens.map((screen, i) => (
+          <div key={i} className="flex items-start">
+            <div className="flex flex-col items-center gap-3" style={{ width: "150px" }}>
+              <MiniPhone src={screen.img} alt={screen.label} className="w-full" />
+              <div className="text-center w-full">
+                <p className="text-sm font-bold text-stone-800 leading-tight">{screen.label}</p>
+                <p className="text-xs text-stone-500 leading-tight mt-1">{screen.desc}</p>
+              </div>
+            </div>
+            {i < screens.length - 1 && (
+              <ArrowRight size={20} className="text-stone-300 shrink-0 mt-10 mx-1" />
+            )}
+          </div>
+        ))}
+      </div>
+    </>
+  );
+
+  return (
+    <section id="demo" className="bg-stone-50 py-20 md:py-28 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-amber-100/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-indigo-100/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <SectionBadge icon={Eye} text="Demo & Alur Pelanggan" />
+          <h2 className="text-3xl sm:text-4xl font-black text-stone-800 mb-4">
+            Lihat Bagaimana{" "}
+            <span className="text-amber-700">Setiap Paket Bekerja</span>
+          </h2>
+          <p className="text-stone-600 max-w-xl mx-auto leading-relaxed">
+            Setiap paket punya alur pelanggan yang berbeda — pilih tab untuk melihat pengalamannya.
+          </p>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {[
+            { id: "basic",   label: "Paket Basic",   Icon: BookOpen,      activeClass: "bg-amber-900 text-white shadow-md" },
+            { id: "pro",     label: "Paket Pro",     Icon: MessageCircle, activeClass: "bg-green-700 text-white shadow-md" },
+            { id: "premium", label: "Paket Premium", Icon: BarChart3,     activeClass: "bg-indigo-700 text-white shadow-md" },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              id={`demo-tab-${tab.id}`}
+              onClick={() => setActiveTab(tab.id)}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-200 ${
+                activeTab === tab.id
+                  ? tab.activeClass
+                  : "bg-white text-stone-500 border border-stone-200 hover:border-stone-300 hover:text-stone-700"
+              }`}
+            >
+              <tab.Icon size={15} />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab: Basic */}
+        {activeTab === "basic" && (
+          <div className="bg-white rounded-3xl border border-amber-100 shadow-lg overflow-hidden">
+            <div className="h-1" style={{ background: "linear-gradient(90deg,#fde68a,#f59e0b,#fbbf24,#f59e0b,#fde68a)" }} />
+            <div className="p-8 md:p-12">
+              <div className="flex flex-wrap items-center gap-3 mb-10">
+                <span className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold px-4 py-2 rounded-full">
+                  <BookOpen size={13} /> Paket Basic — Katalog Digital
+                </span>
+                <span className="text-xs text-stone-400">Alur pelanggan: 3 langkah sederhana</span>
+              </div>
+              <FlowSteps screens={basicScreens} accentColor="bg-amber-900" />
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex items-start gap-3">
+                <BookOpen size={18} className="text-amber-700 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-bold text-amber-900 mb-1">Hanya Katalog — Tanpa Fitur Pemesanan</p>
+                  <p className="text-sm text-amber-800/80 leading-relaxed">
+                    Pada paket Basic, customer hanya bisa melihat dan menjelajahi katalog menu digital. Tidak ada keranjang belanja atau pemesanan. Cocok untuk cafe/restoran yang ingin go-digital dengan biaya paling hemat.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Pro */}
+        {activeTab === "pro" && (
+          <div className="bg-white rounded-3xl border border-green-100 shadow-lg overflow-hidden">
+            <div className="h-1" style={{ background: "linear-gradient(90deg,#6ee7b7,#10b981,#34d399,#10b981,#6ee7b7)" }} />
+            <div className="p-8 md:p-12">
+              <div className="flex flex-wrap items-center gap-3 mb-10">
+                <span className="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 text-xs font-bold px-4 py-2 rounded-full">
+                  <MessageCircle size={13} /> Paket Pro — WhatsApp Order
+                </span>
+                <span className="text-xs text-stone-400">Alur pelanggan: 4 langkah lengkap</span>
+              </div>
+              <FlowSteps screens={proScreens} accentColor="bg-green-700" />
+              <div className="bg-green-50 border border-green-100 rounded-2xl p-6">
+                <h3 className="text-sm font-black text-green-900 mb-4">Kenapa Pelanggan Suka?</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {proHighlights.map((h, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <CheckCircle2 size={16} className="text-green-600 mt-0.5 shrink-0" />
+                      <span className="text-stone-600 text-sm leading-relaxed">{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Premium */}
+        {activeTab === "premium" && (
+          <div className="bg-white rounded-3xl border border-indigo-100 shadow-lg overflow-hidden">
+            <div className="h-1" style={{ background: "linear-gradient(90deg,#c7d2fe,#6366f1,#818cf8,#6366f1,#c7d2fe)" }} />
+            <div className="p-8 md:p-16 flex flex-col items-center text-center gap-6">
+              <div
+                className="w-24 h-24 rounded-3xl flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg,#e0e7ff,#c7d2fe)", boxShadow: "0 8px 32px rgba(99,102,241,0.2)" }}
+              >
+                <BarChart3 size={44} className="text-indigo-600" />
+              </div>
+              <div>
+                <span className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold px-4 py-2 rounded-full">
+                  <Crown size={13} /> Paket Premium — Dashboard Kasir
+                </span>
+                <h3 className="text-2xl font-black text-stone-800 mt-4 mb-2">Demo Segera Hadir</h3>
+                <p className="text-stone-500 text-sm leading-relaxed max-w-md">
+                  Demo interaktif Paket Premium sedang dalam persiapan. Fitur ini mencakup dashboard kasir Android dengan pesanan realtime, notifikasi, dan laporan transaksi lengkap.
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-4 w-full max-w-sm mt-2">
+                {[
+                  { icon: Smartphone, label: "Dashboard Kasir Android" },
+                  { icon: BarChart3,  label: "Laporan Transaksi" },
+                  { icon: TrendingUp, label: "Statistik Pendapatan" },
+                ].map((item, i) => (
+                  <div key={i} className="flex flex-col items-center gap-2 bg-indigo-50 rounded-2xl p-4">
+                    <item.icon size={22} className="text-indigo-600" />
+                    <span className="text-xs font-semibold text-indigo-800 leading-tight text-center">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href="https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20Paket%20Premium.%20Boleh%20info%20lebih%20lanjut?"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-indigo-700 text-white font-bold text-sm px-7 py-3 rounded-2xl hover:bg-indigo-600 transition-all duration-200 shadow-lg"
+              >
+                <MessageCircle size={16} />
+                Tanya Info Premium via WhatsApp
+                <ArrowRight size={14} />
+              </a>
+            </div>
+          </div>
+        )}
+
+        {/* Upgrade path */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm">
+          <button onClick={() => setActiveTab("basic")} className="flex items-center gap-2 bg-amber-50 hover:bg-amber-100 px-4 py-2 rounded-full border border-amber-100 transition-colors">
+            <BookOpen size={14} className="text-amber-700" />
+            <span className="font-semibold text-amber-800">Katalog</span>
+          </button>
+          <ArrowRight size={15} className="text-stone-300 hidden sm:block" />
+          <ChevronDown size={15} className="text-stone-300 sm:hidden" />
+          <button onClick={() => setActiveTab("pro")} className="flex items-center gap-2 bg-green-50 hover:bg-green-100 px-4 py-2 rounded-full border border-green-100 transition-colors">
+            <MessageCircle size={14} className="text-green-700" />
+            <span className="font-semibold text-green-800">Order WhatsApp</span>
+          </button>
+          <ArrowRight size={15} className="text-stone-300 hidden sm:block" />
+          <ChevronDown size={15} className="text-stone-300 sm:hidden" />
+          <button onClick={() => setActiveTab("premium")} className="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-full border border-indigo-100 transition-colors">
+            <BarChart3 size={14} className="text-indigo-700" />
+            <span className="font-semibold text-indigo-800">Dashboard Kasir</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // ── Pricing Section ───────────────────────────────────────────
+
 const PricingSection = () => (
   <section id="pricing" className="bg-stone-50 py-20 md:py-28">
-    <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
       <div className="text-center mb-14">
-        <SectionBadge icon={TrendingUp} text="Harga Terjangkau" />
+        <SectionBadge icon={TrendingUp} text="Bayar Sekali, Pakai Selamanya" />
         <h2 className="text-3xl sm:text-4xl font-black text-stone-800 mb-4">
-          Investasi Kecil,{" "}
-          <span className="text-amber-700">Hasil Berlipat Ganda</span>
+          Tanpa Biaya Bulanan.{" "}
+          <span className="text-amber-700">Tanpa Potongan.</span>
         </h2>
         <p className="text-stone-600 max-w-xl mx-auto leading-relaxed">
-          Dua paket yang dirancang sesuai skala bisnis Anda — mulai dari yang simpel hingga yang butuh sistem pesanan lebih rapi.
+          Tiga paket yang dirancang sesuai skala bisnis Anda — dari katalog simpel hingga dashboard kasir lengkap. <strong>Anda cukup bayar satu kali di awal untuk akses seumur hidup!</strong>
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         <PricingCard
           emoji="📱"
           plan="Basic"
           price="Rp 800.000"
-          tagline="Menu digital simpel, order langsung ke WhatsApp"
-          description="Cocok buat cafe yang mau tampil modern tanpa ribet. Customer cukup scan QR, pilih menu, dan pesanan langsung masuk ke WhatsApp kasir. Tidak perlu download aplikasi, tidak perlu training panjang."
+          tagline="Katalog menu digital tanpa sistem pemesanan"
+          badge="💰 PALING HEMAT"
+          description="Cocok untuk cafe/restoran yang hanya ingin menampilkan katalog menu digital tanpa sistem pemesanan. Customer cukup scan QR untuk melihat semua menu Anda."
           features={[
-            "Menu digital berbasis web (scan QR langsung buka)",
-            "Tampilan elegan sesuai brand cafe",
-            "Order via WhatsApp",
-            "Info WiFi cafe",
-            "Aplikasi admin Android untuk kelola menu & pengaturan",
+            "Katalog menu digital berbasis web",
+            "Scan QR langsung membuka katalog",
+            "Kategori menu",
+            "Foto produk",
+            "Deskripsi produk",
+            "Harga produk",
+            "Informasi cafe/restoran",
+            "Fitur lihat informasi wifi",
+            "Tampilan sesuai branding cafe/restoran",
             "Gratis revisi nama, logo, dan warna tema",
           ]}
           cta="Pesan Paket Basic"
+          tier="basic"
         />
         <PricingCard
           emoji="🚀"
           plan="Pro"
-          price="Rp 1.500.000"
-          tagline="Semua fitur Basic, plus dashboard pesanan realtime & laporan transaksi"
-          description="Buat cafe yang lebih sibuk dan butuh alur pesanan yang lebih rapi. Kasir cukup buka aplikasi di HP — pesanan masuk otomatis, tinggal update status tanpa perlu balas WhatsApp satu per satu."
+          price="Rp 1.000.000"
+          tagline="Order langsung melalui WhatsApp"
+          badge="🔥 PALING LARIS"
+          description="Cocok untuk cafe/restoran yang ingin menerima pesanan langsung melalui WhatsApp. Customer bisa langsung order dari menu digital Anda."
           features={[
             "Semua fitur Basic",
-            "Aplikasi kasir Android — pesanan masuk realtime ke HP kasir",
-            "Notifikasi pesanan baru langsung muncul",
-            "Status pesanan: Diterima → Sedang Dibuat → Siap",
-            "Laporan transaksi harian, mingguan & bulanan",
-            "Total pendapatan & menu terlaris",
+            "Customer bisa langsung order dari menu",
+            "Keranjang belanja",
+            "Order otomatis ke WhatsApp kasir",
+            "Informasi WiFi cafe/restoran",
+            "Aplikasi admin Android untuk kelola menu",
+            "Pengaturan kategori & produk",
             "Gratis revisi nama, logo, dan warna tema",
           ]}
           cta="Pesan Paket Pro"
-          highlight={true}
+          tier="pro"
+        />
+        <PricingCard
+          emoji="👑"
+          plan="Premium"
+          price="Rp 1.500.000"
+          tagline="Dashboard kasir lengkap dengan laporan transaksi"
+          badge="⭐ PALING LENGKAP"
+          description="Paket terlengkap dengan dashboard kasir Android. Pesanan masuk realtime ke HP kasir, lengkap dengan status pesanan dan laporan transaksi."
+          features={[
+            "Semua fitur Pro",
+            "Dashboard kasir Android",
+            "Pesanan realtime masuk ke HP kasir",
+            "Notifikasi pesanan baru",
+            "Update status pesanan (Diterima → Sedang Dibuat → Siap)",
+            "Riwayat transaksi",
+            "Laporan harian, mingguan & bulanan",
+            "Statistik menu terlaris",
+            "Statistik pendapatan",
+            "Gratis revisi nama, logo, dan warna tema",
+          ]}
+          cta="Pesan Paket Premium"
+          tier="premium"
         />
       </div>
 
@@ -986,14 +1296,14 @@ const TestimonialsSection = () => (
           name="Dewi Lestari"
           role="Owner, Cafe Rempah & Kopi"
           avatar="DL"
-          quote="Desainnya bisa disesuaikan warna brand cafe kami, jadi terasa profesional banget. Banyak pelanggan baru yang compliment tentang menu digital kami!"
+          quote="Desainnya bisa disesuaikan warna brand cafe/restoran kami, jadi terasa profesional banget. Banyak pelanggan baru yang compliment tentang menu digital kami!"
           rating={5}
         />
         <TestimonialCard
           name="Hendra Gunawan"
           role="Co-Owner, Restoran Sunda Asli"
           avatar="HG"
-          quote="Kami punya 3 meja untuk tamu VIP yang masing-masing punya QR berbeda. Pengelolaan jadi lebih mudah dan terstruktur. Tim Resavie Labs juga sangat responsif!"
+          quote="Dengan satu QR Code untuk seluruh area, proses order tamu jadi sangat praktis. Pengelolaan juga lebih mudah dan terstruktur. Tim Resavie Labs selalu responsif!"
           rating={5}
         />
         <TestimonialCard
@@ -1025,15 +1335,14 @@ const CTABannerSection = () => (
     <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
       <div className="inline-flex items-center gap-2 bg-amber-800/60 border border-amber-700 text-amber-200 text-xs font-semibold px-4 py-2 rounded-full mb-6">
         <Coffee size={12} />
-        Waktunya Upgrade Cafe Anda!
+        Waktunya Upgrade Cafe/Restoran Anda!
       </div>
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-5 leading-tight">
         Jangan Biarkan Pesaing Anda{" "}
         <span className="text-amber-300">Selangkah Lebih Maju</span>
       </h2>
       <p className="text-amber-200 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-        Setiap hari yang Anda tunda adalah peluang untuk memberikan pengalaman terbaik kepada pelanggan yang hilang. Mulai transformasi digital cafe Anda hari ini — konsultasi pertama{" "}
-        <strong className="text-white">GRATIS</strong>, tanpa tekanan!
+        Mulai transformasi digital cafe/restoran Anda hari ini dengan <strong className="text-white">biaya cukup bayar SEKALI di awal untuk SELAMANYA!</strong> Tidak ada biaya bulanan atau potongan transaksi. Konsultasi pertama <strong className="text-white">GRATIS</strong>, mari diskusi tanpa tekanan.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <a
@@ -1044,7 +1353,7 @@ const CTABannerSection = () => (
           <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
         </a>
         <a
-          href="#how-it-works"
+          href="#demo"
           className="inline-flex items-center justify-center gap-2 border-2 border-amber-600 text-amber-200 font-semibold px-8 py-4 rounded-2xl hover:border-amber-400 hover:text-white transition-all duration-200 text-base"
         >
           Lihat Demo Dulu
@@ -1065,7 +1374,7 @@ const ContactSection = () => (
           <span className="text-amber-700">Siap Membantu Anda!</span>
         </h2>
         <p className="text-stone-500 max-w-lg mx-auto">
-          Tim Resavie Labs siap mendampingi Anda dari konsultasi hingga aplikasi live di cafe Anda. Hubungi kami sekarang!
+          Tim Resavie Labs siap mendampingi Anda dari konsultasi hingga aplikasi live di cafe/restoran Anda. Hubungi kami sekarang!
         </p>
       </div>
 
@@ -1081,7 +1390,7 @@ const ContactSection = () => (
                 value: "+62 822-5872-4734",
                 sublabel: "Respon cepat, biasanya < 1 jam",
                 color: "bg-green-100 text-green-700",
-                href: "https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20QR%20Menu%20Digital%20untuk%20cafe%20saya.%20Boleh%20konsultasi?",
+                href: "https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20QR%20Menu%20Digital%20untuk%20cafe/restoran%20saya.%20Boleh%20konsultasi?",
               },
               {
                 icon: Mail,
@@ -1120,7 +1429,7 @@ const ContactSection = () => (
           <div>
             <h4 className="font-black text-2xl mb-2">☕ Konsultasi Gratis</h4>
             <p className="text-amber-200 text-sm leading-relaxed">
-              Ceritakan kebutuhan cafe Anda kepada kami. Kami bantu pilihkan solusi terbaik sesuai budget — tanpa pressure, tanpa biaya konsultasi!
+              Ceritakan kebutuhan cafe/restoran Anda kepada kami. Kami bantu pilihkan solusi terbaik sesuai budget — tanpa pressure, tanpa biaya konsultasi!
             </p>
           </div>
           <ul className="flex flex-col gap-2.5">
@@ -1137,7 +1446,7 @@ const ContactSection = () => (
             ))}
           </ul>
           <a
-            href="https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20QR%20Menu%20Digital%20untuk%20cafe%20saya.%20Boleh%20konsultasi?"
+            href="https://wa.me/6282258724734?text=Halo%20Resavie%20Labs!%20Saya%20tertarik%20dengan%20QR%20Menu%20Digital%20untuk%20cafe/restoran%20saya.%20Boleh%20konsultasi?"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-auto inline-flex items-center justify-center gap-2 bg-white text-amber-900 font-black text-sm px-6 py-4 rounded-xl hover:bg-amber-50 transition-colors group w-full"
@@ -1267,9 +1576,10 @@ export default function App() {
       <main>
         <HeroSection />
         <StatsSection />
-        <HowItWorksSection />
+        <ProblemSolutionSection />
         <AdminFeaturesSection />
         <FeatureGridSection />
+        <DemoSection />
         <PricingSection />
         <TestimonialsSection />
         <CTABannerSection />
@@ -1300,6 +1610,10 @@ export default function App() {
         }
         .animate-float {
           animation: float 3s ease-in-out infinite;
+        }
+        @keyframes premiumGlow {
+          0%, 100% { box-shadow: 0 0 20px rgba(245,158,11,0.3), 0 32px 80px rgba(120,53,15,0.5); }
+          50% { box-shadow: 0 0 40px rgba(245,158,11,0.5), 0 32px 80px rgba(120,53,15,0.6); }
         }
       `}</style>
     </div>
