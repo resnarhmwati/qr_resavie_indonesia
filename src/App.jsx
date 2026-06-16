@@ -243,7 +243,7 @@ const PricingCard = ({ emoji, plan, price, tagline, description, features, cta, 
               {price}
             </span>
             <span className={`text-sm sm:text-base ml-2 font-bold ${isPremium ? "text-amber-300" : isDark ? "text-amber-400" : "text-amber-700"}`}>
-              / Selamanya
+              / Tahun pertama
             </span>
           </div>
           <p className={`text-sm font-semibold leading-relaxed ${isPremium ? "text-amber-300" : isDark ? "text-amber-400" : "text-amber-700"}`}>
@@ -646,18 +646,23 @@ const ProblemSolutionSection = () => {
             {[
               {
                 icon: FileX,
-                title: "Menu Cepat Rusak & Kotor",
-                desc: "Menu kertas mudah lecek, ketumpahan air, dan terlihat tidak profesional di mata pelanggan.",
+                title: "Pelanggan Sering Bingung Jika Menu Hanya Disajikan dengan Teks Saja",
+                desc: "Menu berbentuk teks sangat tidak enak dilihat pelanggan, karena pelanggan rata-rata melihat visualisasi/gambarnya dulu baru ia fix memesan.",
               },
               {
                 icon: Printer,
                 title: "Repot & Mahal Cetak Ulang",
-                desc: "Setiap ada perubahan harga atau menu baru, Anda harus membuang menu lama dan mencetak yang baru.",
+                desc: "Setiap ada perubahan harga atau menu baru, Anda harus membuang menu lama dan mencetak yang baru, dan Anda perlu mencetak banyak Buku Menu.",
               },
               {
                 icon: Clock,
                 title: "Pelanggan Menunggu Lama",
                 desc: "Pelanggan harus menunggu waiter datang membawa menu, membuat proses pemesanan jadi lambat.",
+              },
+              {
+                icon: FileX,
+                title: "Menu Cepat Rusak & Kotor",
+                desc: "Menu kertas mudah lecek, ketumpahan air, dan terlihat tidak profesional di mata pelanggan.",
               },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4 p-5 bg-red-50/50 rounded-2xl border border-red-100">
@@ -1171,7 +1176,7 @@ const PricingSection = () => (
   <section id="pricing" className="bg-stone-50 py-20 md:py-28">
     <div className="max-w-6xl mx-auto px-4 sm:px-6">
       <div className="text-center mb-14">
-        <SectionBadge icon={TrendingUp} text="Bayar Sekali, Pakai Selamanya" />
+        <SectionBadge icon={TrendingUp} text="Bayar mahal diawal Sekali, Pakai Selamanya" />
         <h2 className="text-3xl sm:text-4xl font-black text-stone-800 mb-4">
           Tanpa Biaya Bulanan.{" "}
           <span className="text-amber-700">Tanpa Potongan.</span>
@@ -1186,7 +1191,7 @@ const PricingSection = () => (
           emoji="📱"
           plan="Basic"
           price="Rp 800.000"
-          tagline="Katalog menu digital tanpa sistem pemesanan"
+          tagline="Tahun ke-2dst: Rp 30.000/bulan. &nbsp; &nbsp; &nbsp; &nbsp; Katalog menu digital tanpa sistem pemesanan"
           badge="💰 PALING HEMAT"
           description="Cocok untuk cafe/restoran yang hanya ingin menampilkan katalog menu digital tanpa sistem pemesanan. Customer cukup scan QR untuk melihat semua menu Anda."
           features={[
@@ -1208,9 +1213,9 @@ const PricingSection = () => (
           emoji="🚀"
           plan="Pro"
           price="Rp 1.000.000"
-          tagline="Order langsung melalui WhatsApp"
+          tagline="Tahun ke-2dst: Rp 30.000/bulan. &nbsp; &nbsp; &nbsp; Order langsung melalui WhatsApp"
           badge="🔥 PALING LARIS"
-          description="Cocok untuk cafe/restoran yang ingin menerima pesanan langsung melalui WhatsApp. Customer bisa langsung order dari menu digital Anda."
+          description="Cocok untuk cafe/restoran yang ingin menerima pesanan langsung melalui WhatsApp. Customer bisa langsung order dari meja dan scan menu digital Anda."
           features={[
             "Semua fitur Basic",
             "Customer bisa langsung order dari menu",
@@ -1227,8 +1232,8 @@ const PricingSection = () => (
         <PricingCard
           emoji="👑"
           plan="Premium"
-          price="Rp 1.500.000"
-          tagline="Dashboard kasir lengkap dengan laporan transaksi"
+          price="Rp 1.700.000"
+          tagline="Tahun ke-2dst: Rp 50.000/bulan. Dashboard kasir lengkap dengan laporan transaksi"
           badge="⭐ PALING LENGKAP"
           description="Paket terlengkap dengan dashboard kasir Android. Pesanan masuk realtime ke HP kasir, lengkap dengan status pesanan dan laporan transaksi."
           features={[
@@ -1338,11 +1343,10 @@ const CTABannerSection = () => (
         Waktunya Upgrade Cafe/Restoran Anda!
       </div>
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-5 leading-tight">
-        Jangan Biarkan Pesaing Anda{" "}
-        <span className="text-amber-300">Selangkah Lebih Maju</span>
+        Kendalikan Menu Cafe/Restoran Anda Langsung dari Kantong!{" "}
       </h2>
       <p className="text-amber-200 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-        Mulai transformasi digital cafe/restoran Anda hari ini dengan <strong className="text-white">biaya cukup bayar SEKALI di awal untuk SELAMANYA!</strong> Tidak ada biaya bulanan atau potongan transaksi. Konsultasi pertama <strong className="text-white">GRATIS</strong>, mari diskusi tanpa tekanan.
+        Modernisasi Cafe/Restoran Anda dengan <strong className="text-white">QR Menu Digital</strong> dan <strong className="text-white">Aplikasi Admin Mobile Khusus</strong>, Sudah termasuk <strong className="text-white">Jasa setup awal & sistem aktif untuk 1 tahun penuh</strong>. Bebas biaya bulanan di <strong className="text-white">1 Tahun Pertama</strong>, dan tanpa potongan komisi! Konsultasi pertama <strong className="text-white">GRATIS</strong>, mari diskusi tanpa tekanan.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <a
